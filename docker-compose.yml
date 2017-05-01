@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  node1:
+    image: cptactionhank/atlassian-jira-software:7.3.4
+    ports:
+     - 9090:8080
+    volumes:
+    - ./jira-home-node1:/var/atlassian/jira
+    - ./jira-shared-home:/var/atlassian/jira-shared-home
+    environment:
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
+  node2:
+    image: cptactionhank/atlassian-jira-software:7.3.4
+    ports:
+     - 9091:8080
+    volumes:
+    - ./jira-home-node2:/var/atlassian/jira
+    - ./jira-shared-home:/var/atlassian/jira-shared-home
+    environment:
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
+
+  proxy:
+    image: httpd:2.4
+    ports:
+    - 80:80
+    volumes: 
+    - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+
+  database:
+    image: postgres:9.1
+    volumes:
+    - ./postgresql-data:/var/lib/postgresql/data
+    - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql
+    environment:
+      POSTGRES_PASSWORD: 1234
+
+
