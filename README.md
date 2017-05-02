@@ -18,4 +18,6 @@ Then you can go to [http://localhost:9090](http://localhost:9090) and configure 
 
 ![Initial JIRA setup](docs/img/jira-setup.png)
 
-After that, restart node2 to reconnect it to database.
+After that, restart node2 to reconnect it to database. Then you can go to your 80 port (the one the balancer is listening on) and connect to JIRA: [http://localhost](http://localhost). You can change the ports editing `docker-compose.yml`
+
+
