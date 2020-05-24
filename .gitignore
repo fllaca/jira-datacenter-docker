@@ -1,0 +1,12 @@
+postgresql-data/*
+
+jira-home-node1/*
+!jira-home-node1/cluster.properties
+!jira-home-node1/dbconfig.xml
+
+jira-home-node2/*
+!jira-home-node2/cluster.properties
+!jira-home-node2/dbconfig.xml
+
+jira-shared-home/*
+!jira-shared-home/.keepdir

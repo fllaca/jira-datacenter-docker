@@ -2,20 +2,20 @@ version: '2'
 
 services:
   node1:
-    image: cptactionhank/atlassian-jira-software:7.3.4
+    image: atlassian/jira-software:8.8.1
     ports:
      - 9090:8080
     volumes:
-    - ./jira-home-node1:/var/atlassian/jira
+    - ./jira-home-node1:/var/atlassian/application-data/jira
     - ./jira-shared-home:/var/atlassian/jira-shared-home
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
   node2:
-    image: cptactionhank/atlassian-jira-software:7.3.4
+    image: atlassian/jira-software:8.8.1
     ports:
      - 9091:8080
     volumes:
-    - ./jira-home-node2:/var/atlassian/jira
+    - ./jira-home-node2:/var/atlassian/application-data/jira
     - ./jira-shared-home:/var/atlassian/jira-shared-home
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
