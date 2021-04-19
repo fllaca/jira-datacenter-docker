@@ -38,7 +38,7 @@ services:
       - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:Z
 
   database:
-    image: postgres:9.1
+    image: postgres:10.5-alpine
     volumes:
       - ./postgresql-data:/var/lib/postgresql/data:Z
       - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql:Z
