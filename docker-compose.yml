@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 
 services:
   node1:
@@ -6,8 +6,8 @@ services:
     ports:
      - 9090:8080
     volumes:
-    - ./jira-home-node1:/var/atlassian/application-data/jira
-    - ./jira-shared-home:/var/atlassian/jira-shared-home
+      - ./jira-home-node1:/var/atlassian/application-data/jira:Z
+      - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
   node2:
@@ -15,8 +15,8 @@ services:
     ports:
      - 9091:8080
     volumes:
-    - ./jira-home-node2:/var/atlassian/application-data/jira
-    - ./jira-shared-home:/var/atlassian/jira-shared-home
+      - ./jira-home-node2:/var/atlassian/application-data/jira:Z
+      - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
 
@@ -25,13 +25,13 @@ services:
     ports:
     - 80:80
     volumes: 
-    - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:Z
 
   database:
     image: postgres:9.1
     volumes:
-    - ./postgresql-data:/var/lib/postgresql/data
-    - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql
+      - ./postgresql-data:/var/lib/postgresql/data:Z
+      - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql:Z
     environment:
       POSTGRES_PASSWORD: 1234
 
