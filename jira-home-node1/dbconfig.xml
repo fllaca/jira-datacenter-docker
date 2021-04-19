@@ -9,7 +9,9 @@
     <url>jdbc:postgresql://database:5432/jiradb</url>
     <driver-class>org.postgresql.Driver</driver-class>
     <username>postgres</username>
-    <password>1234</password>
+    <!-- <password>1234</password> -->
+    <atlassian-password-cipher-provider>com.atlassian.db.config.password.ciphers.base64.Base64Cipher</atlassian-password-cipher-provider>
+    <password>MTIzNA==</password>
     <pool-min-size>20</pool-min-size>
     <pool-max-size>20</pool-max-size>
     <pool-max-wait>30000</pool-max-wait>

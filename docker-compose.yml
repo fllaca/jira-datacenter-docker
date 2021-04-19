@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   node1:
-    image: atlassian/jira-software:8.8.1
+    image: atlassian/jira-software:8.13.4
     ports:
      - 9090:8080
     volumes:
@@ -16,7 +16,7 @@ services:
         soft: 65535
         hard: 65535
   node2:
-    image: atlassian/jira-software:8.8.1
+    image: atlassian/jira-software:8.13.4
     ports:
      - 9091:8080
     volumes:
