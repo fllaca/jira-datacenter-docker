@@ -10,6 +10,11 @@ services:
       - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   node2:
     image: atlassian/jira-software:8.8.1
     ports:
@@ -19,6 +24,11 @@ services:
       - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
 
   proxy:
     image: httpd:2.4
