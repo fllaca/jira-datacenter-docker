@@ -1,37 +1,47 @@
-version: '2'
+version: '3.7'
 
 services:
   node1:
-    image: atlassian/jira-software:8.8.1
+    image: atlassian/jira-software:8.13.4
     ports:
      - 9090:8080
     volumes:
-    - ./jira-home-node1:/var/atlassian/application-data/jira
-    - ./jira-shared-home:/var/atlassian/jira-shared-home
+      - ./jira-home-node1:/var/atlassian/application-data/jira:Z
+      - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
   node2:
-    image: atlassian/jira-software:8.8.1
+    image: atlassian/jira-software:8.13.4
     ports:
      - 9091:8080
     volumes:
-    - ./jira-home-node2:/var/atlassian/application-data/jira
-    - ./jira-shared-home:/var/atlassian/jira-shared-home
+      - ./jira-home-node2:/var/atlassian/application-data/jira:Z
+      - ./jira-shared-home:/var/atlassian/jira-shared-home:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
 
   proxy:
     image: httpd:2.4
     ports:
     - 80:80
     volumes: 
-    - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:Z
 
   database:
-    image: postgres:9.1
+    image: postgres:10.5-alpine
     volumes:
-    - ./postgresql-data:/var/lib/postgresql/data
-    - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql
+      - ./postgresql-data:/var/lib/postgresql/data:Z
+      - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql:Z
     environment:
       POSTGRES_PASSWORD: 1234
 
