@@ -45,6 +45,8 @@ services:
     volumes:
       - ./postgresql-data:/var/lib/postgresql/data:Z
       - ./postgre-db-init.sql:/docker-entrypoint-initdb.d/postgre-db-init.sql:Z
+    ports:
+     - 5432:5432
     environment:
       POSTGRES_PASSWORD: 1234
 
