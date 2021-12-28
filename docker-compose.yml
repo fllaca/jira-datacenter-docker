@@ -30,12 +30,15 @@ services:
         soft: 65535
         hard: 65535
 
+  # TODO replace with haproxy
+  # docker run -d --name my-running-haproxy -v /path/to/etc/haproxy:/usr/local/etc/haproxy:ro --sysctl net.ipv4.ip_unprivileged_port_start=0 haproxy:2.3
   proxy:
-    image: httpd:2.4
+    image: haproxy:2.3
     ports:
     - 80:80
+    - 443:443
     volumes: 
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:Z
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
   database:
     image: postgres:10.5-alpine
